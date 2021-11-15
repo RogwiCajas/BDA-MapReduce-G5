@@ -4,7 +4,7 @@ from taxis_chicago.constants import STATUS_CHOICES
 
 
 class TaxisSerializer(serializers.Serializer):
-    #id = serializers.CharField(max_length=200, read_only=True)
+    id = serializers.CharField(max_length=200, read_only=True)
     
     company = serializers.CharField(max_length=300)
     dropoffCommunityArea = serializers.IntegerField()

@@ -34,7 +34,7 @@ class TaxisViewSet(viewsets.ViewSet):
             serializer = TaxisSerializer(todo)
             return Response(serializer.data)
 
-        raise NotFound(detail="Todo Not Found", code=404)
+        raise NotFound(detail="TAXI Not Found", code=404)
 
     def destroy(self, request, *args, **kwargs):
         pk = kwargs.get('pk')
