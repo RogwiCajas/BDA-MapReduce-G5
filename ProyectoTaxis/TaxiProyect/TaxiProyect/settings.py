@@ -31,13 +31,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
     'corsheaders',
     'TaxiApp',
 ]
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 CORS_ORIGEN_ALLOW_ALL = True
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -81,7 +82,11 @@ WSGI_APPLICATION = 'TaxiProyect.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'taxiBase',
+        'CLIENT': {
+            "host" : "mongodb+srv://root:root@cluster0.q5bnd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+            "name" : "taxischicago",
+            "authMechanism": "SCRAM-SHA-1"
+        },
     }
 }
 
