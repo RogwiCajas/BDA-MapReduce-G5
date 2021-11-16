@@ -4,6 +4,7 @@ from TaxiApp import views
 
 #Se añaden las vistas CRUD
 urlpatterns = [
-    url(r'^viajeentaxi$', views.taxiAPI),
-    url(r'^viajeentaxi/([0-9]+)$')
+    url(r'ver/', views.taxiAPI),
+    url(r'borrar/<str:id>', views.taxiAPI),
+    #url(r'^viajeentaxi/([0-9]+)$',)
 ]
