@@ -6,13 +6,13 @@ from TaxiApp.models import TaxisModel
 from TaxiApp.serializers import TaxisSerializer
 
 # Create your views here.
+@csrf_exempt
 def taxiAPI(request, id=0):
     
     # Operacion READ
     if request.method=='GET':
-        viajesTaxi = TaxisModel.objects.get(unique_key="1d07999e881540c593ca760e963829121ecb6f0b") #aqui cambie el .all() por el get para probar si habia y me sale not found
+        viajesTaxi = TaxisModel.objects.all()
         viajesTaxi_serializer = TaxisSerializer(viajesTaxi, many=True)
-        print (viajesTaxi_serializer.data)
         return JsonResponse(viajesTaxi_serializer.data, safe=False)
     
     # Operacion CREATE
@@ -27,7 +27,7 @@ def taxiAPI(request, id=0):
     # Operacion UPDATE
     elif request.method=='PUT':
         viajesTaxi_data = JSONParser().parse(request)
-        viaje = TaxisModel.objects.get(id=viajesTaxi_data['unique_key'])
+        viaje = TaxisModel.objects.get(unique_key=viajesTaxi_data['unique_key'])
         viajesTaxi_serializer = TaxisSerializer(viaje, data=viajesTaxi_data)
         if viajesTaxi_serializer.is_valid():
             viajesTaxi_serializer.save()
@@ -36,6 +36,6 @@ def taxiAPI(request, id=0):
 
     # Operacion DELETE
     elif request.method=='DELETE':
-        viaje = TaxisModel.objects.get(id=id)
+        viaje = TaxisModel.objects.get(unique_key=id)
         viaje.delete()
         return JsonResponse("Viaje en taxi ELIMINADO correctamente!", safe=False)
