@@ -7,7 +7,7 @@ const path = require('path')
 
 const txt = fs.readFileSync(path.resolve(__dirname, 'result.txt') , 'utf8')
 
-//Ruta resultados
+//Ruta Resultados de MapReduce
 router.get('/taxis/mapreduce/resultados', (req, res) => {
     let arreglo = txt.split('\r\n');
     let resultados =[];

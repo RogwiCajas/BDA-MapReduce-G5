@@ -122,14 +122,14 @@ class App extends React.Component{
     return(
       <div className="App">
       <br /><br />
-      <h2>CRUD: Registros de Carreras de Taxis en chicago</h2>
+      <h2>CRUD: Registros de Carreras de Taxis en Chicago</h2>
       <br />
 
       <button className="btn btn-success" onClick={() =>{this.setState({ tipoModal: 'insertar'}); this.modalInsertar()}}>Agregar registro</button>
       <br/><br/>
 
       <div style={{display: 'flex'}}>
-        <Input id='buscar_id' name='idBuscar' type='text' placeholder='ingresar _id' onChange={this.handleChangeBuscar}/>
+        <Input id='buscar_id' name='idBuscar' type='text' placeholder='Ingresar _id' onChange={this.handleChangeBuscar}/>
         <button id='buscar' className="btn btn-success" onClick={this.obtenerRegistro} >Buscar</button>  
       </div>
 
@@ -151,7 +151,7 @@ class App extends React.Component{
             <th>{this.state.data.trip_total!==(null || undefined)?this.state.data.trip_total:0}</th>
             
             {this.state.data._id !==undefined &&
-            <th><button className="btn btn-success" onClick={()=>{this.seleccionarRegistro(); this.modalInsertar()}}>editar</button>
+            <th><button className="btn btn-success" onClick={()=>{this.seleccionarRegistro(); this.modalInsertar()}}>Editar</button>
             <button className="btn btn-danger" onClick={()=>{this.seleccionarRegistro(); this.setState({modalEliminar: true})}} >Borrar</button>
             </th>
              }
@@ -173,7 +173,7 @@ class App extends React.Component{
             <label htmlFor="unique_key">Unique key</label>
             <input className="form-control" type="text" name="unique_key" id="unique_key" onChange={this.handleChange} value={form?form.unique_key:''} />
             <br />
-            <label htmlFor="taxi_id">taxi id</label>
+            <label htmlFor="taxi_id">Taxi id</label>
             <input className="form-control" type="text" name="taxi_id" id="taxi_id" onChange={this.handleChange} value={form?form.taxi_id:''} />
             <br />
             <label htmlFor="company">Compania</label>
@@ -201,7 +201,7 @@ class App extends React.Component{
 
         <Modal isOpen={this.state.modalEliminar}>
             <ModalBody>
-               ¿Eliminar Registro :  {form && form._id} ?
+               ¿Eliminar Registro con ID {form && form._id} ?
             </ModalBody>
             <ModalFooter>
               <button className="btn btn-danger" onClick={()=>this.peticionDelete()}>Sí</button>
@@ -210,12 +210,12 @@ class App extends React.Component{
         </Modal>
       <br/>
       <br/>
-      <h2>Reporte: tipos totales por compania</h2>
+      <h2>Reporte: Ganancias totales por Compania</h2>
       <table className="table ">
         <thead>
           <tr>
             <th>Compania</th>
-            <th>Tips Totales</th>
+            <th>Ganancias Totales</th>
           </tr>
         </thead>
         <tbody>
