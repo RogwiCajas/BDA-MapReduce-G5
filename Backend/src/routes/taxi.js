@@ -2,6 +2,25 @@
 const express = require("express");
 const taxiSchema = require("../models/taxi");
 const router = express.Router();
+const fs = require('fs')
+const path = require('path')
+
+const txt = fs.readFileSync(path.resolve(__dirname, 'result.txt') , 'utf8')
+
+//Ruta resultados
+router.get('/taxis/mapreduce/resultados', (req, res) => {
+    let arreglo = txt.split('\r\n');
+    let resultados =[];
+    for (linea in arreglo){
+        let values = arreglo[linea].split('\t');
+        console.log(values);
+        resultados.push({
+            compania:values[0],
+            tripTotal: values[1],
+        })
+    }
+    res.send(resultados);
+});
 
 // Ruta y operacion CREATE
 router.post('/taxis', (req, res) => {

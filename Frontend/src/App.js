@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Table, Button, Container, Modal, ModalBody, ModalHeader, FormGroup, ModalFooter, Input } from  'reactstrap';
 import axios from "axios"; 
 
-import { fetchCrearRegistro, fetchEliminarRegistro, fetchRegistro, fetchUpdateRegistro } from './api';
+import { fetchCrearRegistro, fetchEliminarRegistro, fetchRegistro, fetchReporte, fetchUpdateRegistro } from './api';
 
 const id= '6199e0501896218cea96a9a9'
 class App extends React.Component{
@@ -24,6 +24,7 @@ class App extends React.Component{
     },
     tipoModal: 'insertar',
     modalEliminar: false,
+    reporte: [],
 
   }
 
@@ -104,17 +105,26 @@ class App extends React.Component{
     })
   }
 
-  
+  peticionReporte= () => {
+    fetchReporte().then(response =>{
+      this.setState({reporte: response})
+    }).catch(error=>{
+      console.log(error.message);
+    })
+  }
 
-  /*componentDidMount() {
-    this.peticionGET('6199e0501896218cea96a9a9');
-  }*/
+  componentDidMount() {
+    this.peticionReporte();
+  }
 
   render(){
     const {form} =this.state;
     return(
       <div className="App">
-      <br /><br /><br />
+      <br /><br />
+      <h2>CRUD: Registros de Carreras de Taxis en chicago</h2>
+      <br />
+
       <button className="btn btn-success" onClick={() =>{this.setState({ tipoModal: 'insertar'}); this.modalInsertar()}}>Agregar registro</button>
       <br/><br/>
 
@@ -198,7 +208,27 @@ class App extends React.Component{
               <button className="btn btn-secundary" onClick={()=>this.setState({modalEliminar: false})}>No</button>
             </ModalFooter>
         </Modal>
-
+      <br/>
+      <br/>
+      <h2>Reporte: tipos totales por compania</h2>
+      <table className="table ">
+        <thead>
+          <tr>
+            <th>Compania</th>
+            <th>Tips Totales</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.state.reporte.map(r=>{
+            return(
+              <tr>
+                <td>{r.compania}</td>
+                <td>{r.tripTotal}</td>
+              </tr>  
+            )
+          })}
+        </tbody>
+      </table>
 
       </div>
     )

@@ -64,3 +64,10 @@ export const fetchEliminarRegistro = (_id)=>{
     const headers = {'Content-type': 'text/plain'};
     return makeDeleteID (url,{headers});
 }
+
+export const fetchReporte = (id) =>{
+    const url ="http://localhost:9000/api/taxis/mapreduce/resultados";
+    const headers = {'Content-type': 'application/json'};
+    const params ={}
+    return makeGet (url,{params,headers});
+}
